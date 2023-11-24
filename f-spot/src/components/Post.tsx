@@ -72,7 +72,7 @@ const KakaoMapContainer = styled.div`
 `;
 
 export default function PostForm() {
-  const [feed, setfeed] = useState("");
+    const [feed, setfeed] = useState<string>("");
   const [file, setFile] = useState<File | null>(null);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [map, setMap] = useState<any>();
@@ -95,20 +95,50 @@ export default function PostForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+  
+    const token = 'eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJpZCI6MiwiaWF0IjoxNzAwODM1NzkxLCJleHAiOjE3MDIzMDcwMjB9.K2e6qXrcbQh-x9RrWgGLC_n403IfxgIEphWNor2fsdI';
+  
+    // Create a new FormData object
+    const formData = new FormData();
+  
+    formData.append('content', feed);
 
+  // Use the non-null assertion operator (!) to assert that file is not null
+  formData.append('images', file!);
+
+  // Check if selectedTag exists before appending
+  if (selectedTag !== null) {
+    formData.append('tags', selectedTag);
+  }
+  formData.append('latitude', marker.getPosition().getLat().toString());
+  formData.append('longitude', marker.getPosition().getLng().toString());
+    console.log("Form data:", formData);
+  
     try {
-      // 데이터를 서버로 보내기
-      await axios.post('/board/add', {
-        content: feed,
-        latitude: marker.getPosition().getLat(),
-        longitude: marker.getPosition().getLng(),
-      });
-
-      console.log("게시물이 성공적으로 업로드되었습니다.");
+      const response = await axios.post(
+        `http://ec2-13-124-152-41.ap-northeast-2.compute.amazonaws.com/board/add`,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'X-ACCESS-TOKEN': token,
+          },
+        }
+      );
+  
+      console.log("Server response:", response.data);
+  
+      // Handle success or other logic here
     } catch (error) {
-      console.error('게시물 업로드 실패:', error);
+      console.error("Error sending data to the server:", error);
+  
+      // Handle error or other logic here
     }
   };
+  
+  
+  
+  
 
   useEffect(() => {
     window.kakao.maps.load(() => {
