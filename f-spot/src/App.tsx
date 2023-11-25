@@ -5,6 +5,12 @@ import PostForm from './components/Post';
 import Login from './components/kakaoLogin';
 import styled from 'styled-components';
 
+// ... (imports and styled components)
+
+const Logo = styled.img`
+  max-width: 100px; /* Adjust the max-width as needed */
+`;
+
 const HeaderContainer = styled.header`
   background-color: rgba(0, 0, 0, 0.9);
   color: white;
@@ -56,6 +62,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <HeaderContainer>
+        <Logo src="logo1.png" alt="Logo" />
         <Navigation>
           <ul>
             <li><Link to="/">지도</Link></li>

@@ -70,7 +70,7 @@ const KakaoMap = () => {
   }, []);
 
   const createInfowindow = (mapInstance: any, boardInfo: any) => {
-    const { nickname, likeCnt, createdAt, content } = boardInfo;
+    const { nickname, likeCnt, createdAt, content, imageUrl } = boardInfo;
   
     // createdAt을 JavaScript Date 객체로 변환
     const createdDate = new Date(createdAt);
@@ -79,11 +79,16 @@ const KakaoMap = () => {
     const formattedDate = `${createdDate.getFullYear()}-${String(createdDate.getMonth() + 1).padStart(2, '0')}-${String(createdDate.getDate()).padStart(2, '0')}`;
   
     const infowindowContent = `
-      <div style="width: 200px; padding: 10px; background-color: #fff; border: 1px solid #ccc; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1); text-align: left;">
-        <p style="font-size: 14px; margin-bottom: 10px;">작성자: ${nickname}</p>
-        <h3 style="font-size: 16px;">${content}</h3>
-        <p style="font-size: 14px; margin-bottom: 5px;">좋아요: ${likeCnt}</p>
-        <p style="font-size: 14px; margin-bottom: 5px;">작성일: ${formattedDate}</p>
+      <div style="width: 250px; padding: 10px; background-color: #fff; border: 1px solid #ccc; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1); text-align: left; display: flex;">
+        <div style="flex: 1;">
+          <p style="font-size: 14px; margin-bottom: 10px;">작성자: ${nickname}</p>
+          <h3 style="font-size: 16px;">${content}</h3>
+          <p style="font-size: 14px; margin-bottom: 5px;">좋아요: ${likeCnt}</p>
+          <p style="font-size: 14px; margin-bottom: 5px;">작성일: ${formattedDate}</p>
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <img src="커피.png" alt="Board Image" style="max-width: 100%; max-height: 100px; object-fit: cover; border-radius: 5px;">
+        </div>
       </div>
     `;
   
@@ -93,6 +98,7 @@ const KakaoMap = () => {
   
     return infowindow;
   };
+  
   
   const createMarkers = (mapInstance: any, data: any[]) => {
     // Keep track of the currently open info window
