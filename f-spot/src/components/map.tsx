@@ -108,8 +108,10 @@ const KakaoMap = () => {
     return infowindow;
   };
   
-  
   const createMarkers = (mapInstance: any, data: any[]) => {
+    // Keep track of the currently open info window
+    let openInfowindow: any = null;
+  
     data.forEach((markerInfo) => {
       const { latitude, longitude, tags, colors, boardImageUrl, boardId } = markerInfo;
       const markerPosition = new window.kakao.maps.LatLng(latitude, longitude);
@@ -167,14 +169,24 @@ const KakaoMap = () => {
   
         // Add click event listener to each marker
         window.kakao.maps.event.addListener(markerInstance, 'click', () => {
-          // Open the infowindow when a marker is clicked
+          // Close the currently open infowindow if any
+          if (openInfowindow) {
+            openInfowindow.close();
+          }
+  
+          // Open the clicked marker's infowindow
           infowindow.open(mapInstance, markerInstance);
+  
+          // Update the currently open infowindow
+          openInfowindow = infowindow;
         });
       }
   
       markerInstance.setMap(mapInstance);
     });
   };
+  
+
   
 
   const fetchBoardInformation = (boardId: any) => {
