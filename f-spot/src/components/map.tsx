@@ -5,7 +5,7 @@ import styled from "styled-components";
 const MapContainer = styled.div`
   width: calc(100% - 40px); /* 가로 20px 패딩을 양쪽에 적용 */
   height: calc(100vh - 40px); /* 세로 20px 패딩을 위아래로 적용 */
-  padding: 20px; /* 내부에 있는 요소들에 적용할 패딩 */
+  padding: 20px; 
   position: relative;
 `;
 
