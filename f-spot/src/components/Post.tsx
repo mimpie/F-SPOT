@@ -9,12 +9,12 @@ const Form = styled.form`
 `;
 
 const TextArea = styled.textarea`
-  border: 2px solid white;
+  border: 2px solid #1d9bf0;
   padding: 20px;
   border-radius: 20px;
   font-size: 16px;
-  color: white;
-  background-color: black;
+  color: black;
+  background-color: white;
   width: 100%;
   resize: none;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -26,7 +26,9 @@ const TextArea = styled.textarea`
     outline: none;
     border-color: #1d9bf0;
   }
+  margin: 10px; /* Adjust the margin as needed */
 `;
+
 
 const AttachFileButton = styled.label`
   padding: 10px 0px;
@@ -127,7 +129,7 @@ export default function PostForm() {
       );
   
       console.log("Server response:", response.data);
-  
+      window.location.href = '/'; 
       // Handle success or other logic here
     } catch (error) {
       console.error("Error sending data to the server:", error);
