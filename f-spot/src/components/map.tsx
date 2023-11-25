@@ -9,20 +9,6 @@ const MapContainer = styled.div`
   position: relative;
 `;
 
-
-const WriteButton = styled.button`
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  border-radius: 50%;
-  padding: 10px;
-  background-color: #4caf50; /* 버튼 배경색 설정 */
-  color: white; /* 버튼 글자색 설정 */
-  border: none;
-  cursor: pointer;
-  z-index: 1; /* 다른 요소 위로 올림 */
-`;
-
 const KakaoMap = () => {
   const [map, setMap] = useState<any>();
   const [currentLocationMarker, setCurrentLocationMarker] = useState<any>();
@@ -216,7 +202,7 @@ const KakaoMap = () => {
   return (
     <MapContainer>
       <div id="map" style={{ width: "100%", height: "100%" }}></div>
-      <WriteButton onClick={handleWriteButtonClick}>쓰기</WriteButton>
+
     </MapContainer>
   );
 };

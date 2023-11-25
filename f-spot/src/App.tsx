@@ -49,14 +49,13 @@ const App: React.FC = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);
 
   const handleLogin = () => {
-    // Logic to handle login
-    setLoggedIn(true);
+    // Redirect to the login page
+    window.location.href = "/login";
   };
 
   return (
     <Router>
       <HeaderContainer>
-        
         <Navigation>
           <ul>
             <li><Link to="/">지도</Link></li>
